@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informasi Sistem</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/info.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Informasi Sistem</h1>
+      <p>Klasifikasi SVM untuk Identifikasi Pneumonia pada Citra Rontgen</p>
+    </div>
+
+    <div class="info-section">
+
+      <div class="info-card">
+        <h3><span class="icon">🧠</span>Metode yang Digunakan</h3>
+        <p><strong>1. GLCM (Gray Level Co-Occurrence Matrix)</strong></p>
+        <ul>
+          <li>Menghitung co-occurrence matrix dari pixel bertetangga</li>
+          <li>Ekstraksi fitur seperti contrast, homogeneity, energy, dll</li>
+        </ul>
+
+        <p><strong>2. SVM (Support Vector Machine)</strong></p>
+        <ul>
+          <li>Klasifikasi berdasarkan fitur dari GLCM</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3><span class="icon">⚙️</span>Teknologi yang Digunakan</h3>
+        <div class="tech-grid">
+          <div class="tech-item">🐍 Python</div>
+          <div class="tech-item">🌐 Flask</div>
+          <div class="tech-item">🖼️ OpenCV</div>
+          <div class="tech-item">📊 Scikit-Learn</div>
+          <div class="tech-item">🧮 NumPy</div>
+          <div class="tech-item">🧮 Scikit-Image</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3><span class="icon">🔄</span>Alur Sistem</h3>
+        <ol class="flow">
+          <li>Upload citra rontgen</li>
+          <li>Preprocessing (grayscale, scaling)</li>
+          <li>Ekstraksi fitur GLCM</li>
+          <li>Klasifikasi dengan SVM</li>
+          <li>Menampilkan hasil</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="{{ url_for('index') }}" class="btn btn-primary">Kembali</a>
+    </div>
+  </div>
+</body>
+
+</html>

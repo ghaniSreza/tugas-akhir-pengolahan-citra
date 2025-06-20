@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deteksi Pneumonia - GLCM & SVM</title>
+  <link rel="stylesheet" href="static/css/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Deteksi Pneumonia</h2>
+      <p>Sistem Deteksi Otomatis menggunakan GLCM & SVM</p>
+    </div>
+
+    <div class="method-info">
+      <h3>📊 Metode yang Digunakan</h3>
+      <p><strong>GLCM:</strong> Ekstraksi fitur tekstur</p>
+      <p><strong>SVM:</strong> Klasifikasi Citra</p>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-messages">
+      {% for message in messages %}
+      <div class="flash-message flash-error">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('predict') }}" enctype="multipart/form-data">
+      <div class="upload-section" id="uploadSection">
+        <div class="upload-icon">📁</div>
+        <h3>Upload Gambar Citra</h3>
+        <p>Drag & drop atau klik tombol di bawah</p>
+        <input type="file" name="file" id="fileInput" class="file-input" accept="image/*" required />
+        <button type="button" class="upload-btn" onclick="document.getElementById('fileInput').click()">
+          Pilih Gambar
+        </button>
+        <div class="file-info" id="fileInfo">
+          <p><strong>File:</strong> <span id="fileName"></span></p>
+          <p><strong>Ukuran:</strong> <span id="fileSize"></span></p>
+          <img id="previewImage" class="preview-image" style="display: none;" />
+        </div>
+      </div>
+
+      <button type="submit" class="predict-btn" id="predictBtn" disabled>
+        Analisis Gambar
+      </button>
+
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Menganalisis gambar...</p>
+      </div>
+    </form>
+
+    <div class="info-link">
+      <a href="{{ url_for('info') }}">Informasi Sistem</a>
+    </div>
+  </div>
+
+  <script src="static/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Analisis - Deteksi Pneumonia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> Hasil Analisis</h1>
+            <p>Analisis Pneumonia menggunakan GLCM & SVM</p>
+        </div>
+
+        <div class="result-section">
+            <div class="image-section">
+                <img src="{{ url_for('static', filename='uploads/' + result.filename) }}" alt="Gambar yang dianalisis"
+                    class="uploaded-image">
+                <div class="image-info">
+                    <strong>File:</strong> {{ result.filename }}
+                </div>
+            </div>
+
+            <div class="prediction-section">
+                {% if result.prediction == 'Pneumonia' %}
+                <div class="prediction-result prediction-Pneumonia pulse">
+                    <div class="prediction-icon">⚠️</div>
+                    <div class="prediction-text">Prediksi Pneumonia</div>
+                    <div class="confidence-text">Confidence: {{ result.confidence }}%</div>
+                </div>
+                {% else %}
+                <div class="prediction-result prediction-normal">
+                    <div class="prediction-icon">✅</div>
+                    <div class="prediction-text">Hasil NORMAL</div>
+                    <div class="confidence-text">Confidence: {{ result.confidence }}%</div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h3 class="features-title">🔬 Fitur GLCM yang Diekstraksi</h3>
+            <div class="features-grid">
+                {% for feature in result.features %}
+                <div class="feature-card">
+                    <div class="feature-name">{{ feature.name }}</div>
+                    <div class="feature-value">{{ feature.value }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h3>📝 Penjelasan Fitur GLCM</h3>
+            <p><strong>Contrast:</strong> Mengukur perbedaan intensitas antara pixel bertetangga.</p>
+            <p><strong>Dissimilarity:</strong> Mengukur ketidakmiripan antara pasangan pixel.</p>
+            <p><strong>Homogeneity:</strong> Mengukur keseragaman tekstur.</p>
+            <p><strong>Energy:</strong> Mengukur keseragaman distribusi intensitas.</p>
+            <p><strong>Correlation:</strong> Mengukur korelasi linear antara pixel bertetangga.</p>
+            <p><strong>ASM:</strong> Mengukur keseragaman tekstur.</p>
+        </div>
+
+        <div class="actions">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Analisis Gambar Lain</a>
+            <a href="{{ url_for('info') }}" class="btn btn-secondary">Info Sistem</a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/result.js') }}"></script>
+</body>
+
+</html>
